@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodTracker.Begin">
+    
+    <AbsoluteLayout BackgroundColor="#ffd373">
+
+        <Ellipse Fill="#5fc0ce"
+                 WidthRequest="300"
+                 HeightRequest="300"
+                 AbsoluteLayout.LayoutBounds=".5, .2, AutoSize, AutoSize" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <BoxView BackgroundColor="#5fc0ce"
+                 CornerRadius ="15"
+                 WidthRequest="220"
+                 HeightRequest="220"
+                 AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <Label Text="MoodToday"
+               FontSize="40"
+               TextColor="Black"
+               AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <Image Source="image.png"
+               WidthRequest="220"
+               HeightRequest="220"
+               AbsoluteLayout.LayoutBounds=".5, .25, AutoSize, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <Button Text ="Открыть 
+                дневник" 
+                CornerRadius="20"
+                FontSize="25"
+                Clicked ="OpenApp"
+                BackgroundColor="#5fc0ce" 
+                AbsoluteLayout.LayoutBounds=".5, .7, 200, 100" 
+                AbsoluteLayout.LayoutFlags="PositionProportional" />
+        
+    </AbsoluteLayout>
+
+</ContentPage>

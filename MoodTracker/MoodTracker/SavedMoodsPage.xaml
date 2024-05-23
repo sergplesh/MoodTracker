@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodTracker.SavedMoodsPage">
+    
+    <StackLayout Padding="10" BackgroundColor="#ffd373">
+
+
+        <AbsoluteLayout>
+
+            <BoxView BackgroundColor="#ffd373" 
+                        WidthRequest="380" HeightRequest="300"
+                        CornerRadius="10"
+                        AbsoluteLayout.LayoutBounds=".5, .0, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            <BoxView BackgroundColor="#5fc0ce" 
+                        WidthRequest="380" HeightRequest="230"
+                        CornerRadius="10"
+                        AbsoluteLayout.LayoutBounds=".5, 0, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            <BoxView BackgroundColor="AliceBlue" 
+                        WidthRequest="350" HeightRequest="80"
+                        CornerRadius="10"
+                        AbsoluteLayout.LayoutBounds=".5, .18, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <BoxView BackgroundColor="AliceBlue" 
+                        WidthRequest="350" HeightRequest="80"
+                        CornerRadius="10"
+                        AbsoluteLayout.LayoutBounds=".5, .6, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            <Label Text="Фильтры" FontSize="Title" TextColor="Black"
+                    HorizontalOptions="Center"
+                        AbsoluteLayout.LayoutBounds=".5, 0, 380, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            <Label Text="Фильтр по месяцу" FontSize="Subtitle" TextColor="Black"
+                        AbsoluteLayout.LayoutBounds=".08, .16, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <Picker x:Name="MonthPicker" Title="Выбери месяц" SelectedIndexChanged="OnMonthYearSelected"
+                        AbsoluteLayout.LayoutBounds=".5, .24, 340, 60" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>January</x:String>
+                        <x:String>February</x:String>
+                        <x:String>March</x:String>
+                        <x:String>April</x:String>
+                        <x:String>May</x:String>
+                        <x:String>June</x:String>
+                        <x:String>July</x:String>
+                        <x:String>August</x:String>
+                        <x:String>September</x:String>
+                        <x:String>October</x:String>
+                        <x:String>November</x:String>
+                        <x:String>December</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Text="Фильтр по году" FontSize="Subtitle" TextColor="Black"
+                        AbsoluteLayout.LayoutBounds=".08, .49, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            <Entry x:Name="YearEntry" Placeholder="Введите год записи..." TextChanged="OnYearEntryChanged" Keyboard="Numeric"
+                        AbsoluteLayout.LayoutBounds=".5, .63, 340, 60" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            <BoxView BackgroundColor="#5fc0ce" 
+                        WidthRequest="400" HeightRequest="60"
+                        AbsoluteLayout.LayoutBounds=".5, 1, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            <Label Text="Ваши записи" FontSize="Title" HorizontalOptions="Center" 
+                        TextColor="Black"
+                        AbsoluteLayout.LayoutBounds=".5, .95, AutoSize, AutoSize" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            
+        </AbsoluteLayout>
+
+        <ListView x:Name="MoodListView" ItemTapped="OnMoodItemTapped" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal" Padding="10" Background="LightBlue">
+                                <Image Source="{Binding MoodImage}" WidthRequest="50" HeightRequest="50" />
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}" />
+                                    <Label Text="{Binding Mood}" />
+                                </StackLayout>
+                                <AbsoluteLayout HorizontalOptions="FillAndExpand">
+                                    <!-- Кнопка удаления -->
+                                    <Button Text="Удалить" Clicked="OnDeleteMoodClicked" BackgroundColor="Red" TextColor="White"
+                                             AbsoluteLayout.LayoutBounds="1, .5, 100, 50" 
+                                             AbsoluteLayout.LayoutFlags="PositionProportional">
+                                        <Button.CommandParameter>
+                                            <x:Reference Name="MoodListView"/>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </AbsoluteLayout>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Добавляем кнопку для прокрутки в начало списка -->
+        <Button Text="Вернуться в начало списка" 
+                VerticalOptions="Center"
+                Clicked="OnScrollToTopClicked"
+                HeightRequest="35"
+                CornerRadius="20"/>
+
+    </StackLayout>
+</ContentPage>
