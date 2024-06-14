@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodTracker.SavedMoodsPage">
-    
+
     <StackLayout Padding="10" BackgroundColor="#ffd373">
 
 
@@ -44,6 +44,7 @@
                         AbsoluteLayout.LayoutFlags="PositionProportional">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
+                        <x:String>All Months</x:String>
                         <x:String>January</x:String>
                         <x:String>February</x:String>
                         <x:String>March</x:String>
@@ -76,7 +77,7 @@
                         TextColor="Black"
                         AbsoluteLayout.LayoutBounds=".5, .95, AutoSize, AutoSize" 
                         AbsoluteLayout.LayoutFlags="PositionProportional"/>
-            
+
         </AbsoluteLayout>
 
         <ListView x:Name="MoodListView" ItemTapped="OnMoodItemTapped" HasUnevenRows="True">

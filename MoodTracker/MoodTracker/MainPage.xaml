@@ -60,7 +60,11 @@
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
         <Image Source="diary.png"
                AbsoluteLayout.LayoutBounds=".87, .8, 150, 150" 
-               AbsoluteLayout.LayoutFlags="PositionProportional" />
+               AbsoluteLayout.LayoutFlags="PositionProportional">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnImageTapped"/>
+            </Image.GestureRecognizers>
+        </Image>
         <Button Text="Дневник" 
                 TextColor="Black"
                 FontSize="Large"

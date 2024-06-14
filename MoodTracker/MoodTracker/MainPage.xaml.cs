@@ -1,6 +1,7 @@
 ﻿using MoodTracker.Data;
 using MoodTracker.Models;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace MoodTracker
@@ -30,7 +31,7 @@ namespace MoodTracker
         {
             if (MoodPicker.SelectedItem == null)
             {
-                await DisplayAlert("Ошибка", "Пожалуйста, выберите настроение.", "OK");
+                await DisplayAlert("Error", "Please select a mood.", "OK");
                 return;
             }
 
@@ -46,6 +47,13 @@ namespace MoodTracker
             };
 
             await Database.SaveMoodAsync(mood);
+
+            // Вставляем новую запись в начало списка на странице сохраненных настроений
+            if (Navigation.NavigationStack.LastOrDefault() is SavedMoodsPage savedMoodsPage)
+            {
+                savedMoodsPage.InsertMoodAtStart(mood);
+            }
+
             MoodPicker.SelectedIndex = -1;
             NotesEditor.Text = string.Empty;
         }
@@ -73,6 +81,11 @@ namespace MoodTracker
                 default:
                     return null;
             }
+        }
+
+        private async void OnImageTapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SavedMoodsPage());
         }
     }
 }

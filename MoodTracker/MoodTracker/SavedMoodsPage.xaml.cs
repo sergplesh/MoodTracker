@@ -22,7 +22,7 @@ namespace MoodTracker
         private async void LoadMoods()
         {
             _allMoods = await MainPage.Database.GetMoodsAsync();
-            MoodListView.ItemsSource = _allMoods;
+            MoodListView.ItemsSource = _allMoods.OrderByDescending(m => m.Date).ToList();
         }
 
         private void OnMonthYearSelected(object sender, EventArgs e)
@@ -48,9 +48,9 @@ namespace MoodTracker
         {
             IEnumerable<MoodEntry> filteredMoods = _allMoods;
 
-            if (MonthPicker.SelectedIndex != -1)
+            if (MonthPicker.SelectedIndex > 0) // Индекс 0 для "Все месяцы"
             {
-                int selectedMonth = MonthPicker.SelectedIndex + 1; // Месяцы в DateTime начинаются с 1 (январь)
+                int selectedMonth = MonthPicker.SelectedIndex; // Месяцы в DateTime начинаются с 1 (январь)
                 filteredMoods = filteredMoods.Where(m => m.Date.Month == selectedMonth);
             }
 
@@ -59,7 +59,7 @@ namespace MoodTracker
                 filteredMoods = filteredMoods.Where(m => m.Date.Year == selectedYear);
             }
 
-            MoodListView.ItemsSource = filteredMoods.ToList();
+            MoodListView.ItemsSource = filteredMoods.OrderByDescending(m => m.Date).ToList();
         }
 
         private async void OnMoodItemTapped(object sender, ItemTappedEventArgs e)
@@ -80,7 +80,7 @@ namespace MoodTracker
             ((ListView)sender).SelectedItem = null;
         }
 
-        // Новый метод для удаления записи
+        // метод для удаления записи
         private async void OnDeleteMoodClicked(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -88,7 +88,7 @@ namespace MoodTracker
 
             if (mood != null)
             {
-                bool isConfirmed = await DisplayAlert("Подтверждение удаления", "Вы действительно хотите удалить запись?", "Да", "Нет");
+                bool isConfirmed = await DisplayAlert("Confirm Delete", "Are you sure you want to delete this mood?", "Yes", "No");
                 if (isConfirmed)
                 {
                     await MainPage.Database.DeleteMoodAsync(mood);
@@ -98,6 +98,11 @@ namespace MoodTracker
             }
         }
 
-
+        // Метод для вставки новой записи в начало списка
+        public void InsertMoodAtStart(MoodEntry mood)
+        {
+            _allMoods.Insert(0, mood);
+            MoodListView.ItemsSource = _allMoods.OrderByDescending(m => m.Date).ToList();
+        }
     }
 }
