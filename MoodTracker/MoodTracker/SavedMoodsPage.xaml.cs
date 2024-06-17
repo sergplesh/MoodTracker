@@ -40,7 +40,7 @@ namespace MoodTracker
         {
             if (MoodListView.ItemsSource != null && _allMoods.Any())
             {
-                MoodListView.ScrollTo(_allMoods.First(), ScrollToPosition.Start, true);
+                MoodListView.ScrollTo(_allMoods.Last(), ScrollToPosition.End, true);
             }
         }
 
@@ -95,6 +95,24 @@ namespace MoodTracker
                     _allMoods.Remove(mood);
                     FilterMoods();
                 }
+            }
+        }
+
+        private async void OnEditMoodClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var mood = button.BindingContext as MoodEntry;
+
+            if (mood != null)
+            {
+                var editPage = new EditMoodPage(mood);
+                editPage.MoodUpdated += (source, updatedMood) =>
+                {
+                    var index = _allMoods.IndexOf(mood);
+                    _allMoods[index] = updatedMood;
+                    FilterMoods();
+                };
+                await Navigation.PushAsync(editPage);
             }
         }
 

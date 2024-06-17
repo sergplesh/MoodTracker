@@ -85,6 +85,42 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Image Source="{Binding MoodImage}" WidthRequest="50" HeightRequest="50" />
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" />
+                                    <Label Text="{Binding Mood}" />
+                                </StackLayout>
+                                <AbsoluteLayout HorizontalOptions="FillAndExpand">
+                                    <Button Text="Изменить" Clicked="OnEditMoodClicked" BackgroundColor="Blue" TextColor="White"
+                                            AbsoluteLayout.LayoutBounds="0.1, .5, 110, 50" 
+                                            AbsoluteLayout.LayoutFlags="PositionProportional">
+                                        <Button.CommandParameter>
+                                            <x:Reference Name="MoodListView"/>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                    <Button Text="Удалить" Clicked="OnDeleteMoodClicked" BackgroundColor="Red" TextColor="White"
+                                            AbsoluteLayout.LayoutBounds="1, .5, 100, 50" 
+                                            AbsoluteLayout.LayoutFlags="PositionProportional">
+                                        <Button.CommandParameter>
+                                            <x:Reference Name="MoodListView"/>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </AbsoluteLayout>
+                                <!--<Button Text="Edit" Clicked="OnEditMoodClicked" BackgroundColor="Blue" TextColor="White" />
+                                <Button Text="Delete" Clicked="OnDeleteMoodClicked" BackgroundColor="Red" TextColor="White" />-->
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <!--<ListView x:Name="MoodListView" ItemTapped="OnMoodItemTapped" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
                             <StackLayout Orientation="Horizontal" Padding="10" Background="LightBlue">
                                 <Image Source="{Binding MoodImage}" WidthRequest="50" HeightRequest="50" />
                                 <StackLayout Orientation="Vertical">
@@ -92,7 +128,7 @@
                                     <Label Text="{Binding Mood}" />
                                 </StackLayout>
                                 <AbsoluteLayout HorizontalOptions="FillAndExpand">
-                                    <!-- Кнопка удаления -->
+                                    --><!-- Кнопка удаления --><!--
                                     <Button Text="Удалить" Clicked="OnDeleteMoodClicked" BackgroundColor="Red" TextColor="White"
                                              AbsoluteLayout.LayoutBounds="1, .5, 100, 50" 
                                              AbsoluteLayout.LayoutFlags="PositionProportional">
@@ -106,7 +142,7 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
         <!-- Добавляем кнопку для прокрутки в начало списка -->
         <Button Text="Вернуться в начало списка" 
