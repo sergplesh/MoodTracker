@@ -50,7 +50,7 @@ namespace MoodTracker
             // создаём запись
             var mood = new MoodEntry
             {
-                Date = DateTime.Now,
+                Date = DatePicker.Date,
                 Mood = selectedMood,
                 Notes = NotesEditor.Text,
                 MoodImage = moodImage

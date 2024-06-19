@@ -8,23 +8,33 @@
         <!--фон для места создания записи-->
         <BoxView BackgroundColor="#5fc0ce"
                  CornerRadius="20"
-                 AbsoluteLayout.LayoutBounds=".5, .1, 380, 380" 
+                 AbsoluteLayout.LayoutBounds=".5, .01, 380, 410" 
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
         <BoxView BackgroundColor="LightBlue"
                  CornerRadius="20"
-                 AbsoluteLayout.LayoutBounds=".5, .09, 350, 50" 
+                 AbsoluteLayout.LayoutBounds=".5, .02, 350, 50" 
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
         <!--надпись "Как прошёл ваш день?", оглавляющая создание записи-->
         <Label Text="Как прошёл ваш день?" TextColor="Black" FontSize="Title" 
                HorizontalOptions="CenterAndExpand"
-               AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
+               AbsoluteLayout.LayoutBounds=".5, .03, AutoSize, AutoSize" 
                AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <!--выбор даты-->
+        <Label Text="выберите дату:" TextColor="Black" FontSize="Medium" 
+               AbsoluteLayout.LayoutBounds=".5, .105, 350, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <DatePicker x:Name="DatePicker"  Date="{Binding SelectedDate}"
+                Background="AliceBlue"
+                AbsoluteLayout.LayoutBounds=".5, .14, 350, 40" 
+                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
         <!--выбор настроения-->
         <Picker x:Name="MoodPicker" Title="Выберите своё настроение"
                 Background="AliceBlue"
-                AbsoluteLayout.LayoutBounds=".5, .2, 350, 60" 
+                AbsoluteLayout.LayoutBounds=".5, .23, 350, 60" 
                 AbsoluteLayout.LayoutFlags="PositionProportional">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -40,7 +50,7 @@
         <!--запись впечатлений за день-->
         <Editor x:Name="NotesEditor" Placeholder="Запишите свои эмоции..."
                 Background="AliceBlue"
-                AbsoluteLayout.LayoutBounds=".5, .33, 350, 100" 
+                AbsoluteLayout.LayoutBounds=".5, .35, 350, 100" 
                 AbsoluteLayout.LayoutFlags="PositionProportional" />
 
         <!--кнопка для сохранения записи-->
@@ -51,7 +61,7 @@
                 BorderColor="Black"
                 BorderWidth="2"
                 Clicked="OnSaveMoodClicked" 
-                AbsoluteLayout.LayoutBounds=".5, .49, 350, 70" 
+                AbsoluteLayout.LayoutBounds=".5, .49, 350, 60"
                 AbsoluteLayout.LayoutFlags="PositionProportional" />
 
         <!--фон для кнопки дневника-->
