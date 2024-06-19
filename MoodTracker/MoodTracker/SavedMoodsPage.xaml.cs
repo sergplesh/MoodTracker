@@ -11,7 +11,7 @@ namespace MoodTracker
         private DateTime _lastTapTime;
         private const int DoubleTapDelay = 300; // Время в миллисекундах, в течение которого должно произойти двойное нажатие
 
-        private List<MoodEntry> _allMoods; // Полный список настроений
+        private List<MoodEntry> allMoods; // Полный список настроений
 
         public SavedMoodsPage()
         {
@@ -21,8 +21,8 @@ namespace MoodTracker
 
         private async void LoadMoods()
         {
-            _allMoods = await MainPage.Database.GetMoodsAsync();
-            MoodListView.ItemsSource = _allMoods.OrderByDescending(m => m.Date).ToList();
+            allMoods = await MainPage.Database.GetMoodsAsync();
+            MoodListView.ItemsSource = allMoods.OrderByDescending(m => m.Date).ToList();
         }
 
         private void OnMonthYearSelected(object sender, EventArgs e)
@@ -38,15 +38,15 @@ namespace MoodTracker
         // Обработчик нажатия на кнопку "Scroll to Top"
         private void OnScrollToTopClicked(object sender, EventArgs e)
         {
-            if (MoodListView.ItemsSource != null && _allMoods.Any())
+            if (MoodListView.ItemsSource != null && allMoods.Any())
             {
-                MoodListView.ScrollTo(_allMoods.Last(), ScrollToPosition.End, true);
+                MoodListView.ScrollTo(allMoods.Last(), ScrollToPosition.End, true);
             }
         }
 
         private void FilterMoods()
         {
-            IEnumerable<MoodEntry> filteredMoods = _allMoods;
+            IEnumerable<MoodEntry> filteredMoods = allMoods;
 
             if (MonthPicker.SelectedIndex > 0) // Индекс 0 для "Все месяцы"
             {
@@ -92,35 +92,44 @@ namespace MoodTracker
                 if (isConfirmed)
                 {
                     await MainPage.Database.DeleteMoodAsync(mood);
-                    _allMoods.Remove(mood);
+                    allMoods.Remove(mood);
                     FilterMoods();
                 }
             }
         }
 
+        /// <summary>
+        /// Метод для редактирования записи
+        /// </summary>
         private async void OnEditMoodClicked(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            var mood = button.BindingContext as MoodEntry;
+            var button = sender as Button; // Кнопка редактирования
+            var mood = button.BindingContext as MoodEntry; // Получение записи настроения
 
             if (mood != null)
             {
+                // Создание страницы редактирования и обработка обновления настроения
                 var editPage = new EditMoodPage(mood);
                 editPage.MoodUpdated += (source, updatedMood) =>
                 {
-                    var index = _allMoods.IndexOf(mood);
-                    _allMoods[index] = updatedMood;
-                    FilterMoods();
+                    var index = allMoods.IndexOf(mood); // Поиск индекса редактируемого настроения
+                    allMoods[index] = updatedMood; // Обновление настроения в списке
+                    FilterMoods(); // Обновление списка настроений
                 };
-                await Navigation.PushAsync(editPage);
+                await Navigation.PushAsync(editPage); // Переход на страницу редактирования
             }
         }
 
-        // Метод для вставки новой записи в начало списка
-        public void InsertMoodAtStart(MoodEntry mood)
-        {
-            _allMoods.Insert(0, mood);
-            MoodListView.ItemsSource = _allMoods.OrderByDescending(m => m.Date).ToList();
-        }
+        ///// <summary>
+        ///// Метод для вставки новой записи в начало списка
+        ///// </summary>
+        ///// <param name="mood">запись</param>
+        //public void InsertMoodAtStart(MoodEntry mood)
+        //{
+        //    // вставляем в список запись
+        //    allMoods.Insert(0, mood);
+        //    // сортируем в порядке убывания по дате записи
+        //    MoodListView.ItemsSource = allMoods.OrderByDescending(m => m.Date).ToList(); 
+        //}
     }
 }

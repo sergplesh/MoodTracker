@@ -35,15 +35,19 @@ namespace MoodTracker
 
         private async void OnSaveMoodClicked(object sender, EventArgs e)
         {
+            // если настроение не выбрано, то сообщаем о необходимости его выбрать
             if (MoodPicker.SelectedItem == null)
             {
-                await DisplayAlert("Error", "Please select a mood.", "OK");
+                await DisplayAlert("Ошибка!", "Пожалуйста, выберите настроение.", "Ок");
                 return;
             }
 
-            var selectedMood = MoodPicker.SelectedItem.ToString();
+            // выбранное настроение
+            var selectedMood = MoodPicker.SelectedItem.ToString(); 
+            // получаем путь к картинке, соответствующей настроению
             var moodImage = GetMoodImage(selectedMood);
 
+            // создаём запись
             var mood = new MoodEntry
             {
                 Date = DateTime.Now,
@@ -52,18 +56,22 @@ namespace MoodTracker
                 MoodImage = moodImage
             };
 
+            // сохраняем в таблицу БД сделанную запись
             await Database.SaveMoodAsync(mood);
 
-            // Вставляем новую запись в начало списка на странице сохраненных настроений
-            if (Navigation.NavigationStack.LastOrDefault() is SavedMoodsPage savedMoodsPage)
-            {
-                savedMoodsPage.InsertMoodAtStart(mood);
-            }
+            //// Вставляем новую запись в начало списка на странице сохраненных настроений
+            //if (Navigation.NavigationStack.LastOrDefault() is SavedMoodsPage savedMoodsPage)
+            //{
+            //    savedMoodsPage.InsertMoodAtStart(mood);
+            //}
 
             MoodPicker.SelectedIndex = -1;
             NotesEditor.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Переход в дневник с записями
+        /// </summary>
         private async void OnViewSavedMoodsClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SavedMoodsPage());
@@ -94,11 +102,11 @@ namespace MoodTracker
         }
 
         /// <summary>
-        /// метод для перехода в дневник с записями кликом по картинке
+        /// Метод для перехода в дневник с записями кликом по картинке
         /// </summary>
         private async void OnImageTapped(object sender, EventArgs e)
         {
-            // добавление в навигационный стек страницы для создания записи настроения
+            // Переход на страницу сохраненных настроений (добавление в навигационный стек страницы для создания записи настроения)
             await Navigation.PushAsync(new SavedMoodsPage());
         }
     }

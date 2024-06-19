@@ -25,7 +25,7 @@ namespace MoodTracker
         /// </summary>
         private async void OpenApp(object sender, EventArgs e)
         {
-            // добавление в навигационный стек страницы для создания записи настроения
+            // Переход на страницу создания записей (добавление в навигационный стек страницы для создания записи настроения)
             await Navigation.PushAsync(new MainPage()); 
         }
     }

@@ -17,7 +17,6 @@ namespace MoodTracker
 
         private void LoadMood()
         {
-            // Убедитесь, что используете экземпляры DatePicker, MoodPicker и NotesEditor
             DatePicker.Date = _moodEntry.Date;
             MoodPicker.SelectedItem = _moodEntry.Mood;
             NotesEditor.Text = _moodEntry.Notes;
