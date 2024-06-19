@@ -2,56 +2,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodTracker.EditMoodPage">
-    <StackLayout Padding="10">
-        <Label Text="Edit Mood" FontSize="Large" HorizontalOptions="Center" />
 
-        <Label Text="Date" />
-        <DatePicker x:Name="DatePicker" />
-
-        <Label Text="Mood" />
-        <Picker x:Name="MoodPicker" Title="Select your mood">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Отличное</x:String>
-                    <x:String>Хорошее</x:String>
-                    <x:String>Нормальное</x:String>
-                    <x:String>Плохое</x:String>
-                    <x:String>Ужасное</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-
-        <Label Text="Notes" />
-        <Editor x:Name="NotesEditor" />
-
-        <Button Text="Save Changes" Clicked="OnSaveChangesClicked" />
-    </StackLayout>
-    
-    
-    
-    
-    
-    <!--<AbsoluteLayout BackgroundColor="#ffd373">
-
+    <AbsoluteLayout BackgroundColor="#ffd373">
+        
         <BoxView BackgroundColor="#5fc0ce"
-             CornerRadius="20"
-             AbsoluteLayout.LayoutBounds=".5, .1, 380, 380" 
-             AbsoluteLayout.LayoutFlags="PositionProportional"/>
+         CornerRadius="20"
+         AbsoluteLayout.LayoutBounds=".5, .15, 380, 500" 
+         AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
         <BoxView BackgroundColor="LightBlue"
-             CornerRadius="20"
-             AbsoluteLayout.LayoutBounds=".5, .09, 350, 50" 
-             AbsoluteLayout.LayoutFlags="PositionProportional"/>
+         CornerRadius="20"
+         AbsoluteLayout.LayoutBounds=".5, .08, 350, 50" 
+         AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-        <Label Text="Как прошёл ваш день?" TextColor="Black" FontSize="Title" 
+        <Label Text="Редактирование записи" TextColor="Black" FontSize="Title" 
            HorizontalOptions="CenterAndExpand"
-           AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
+           AbsoluteLayout.LayoutBounds=".5, .09, AutoSize, AutoSize" 
            AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-        <Picker x:Name="MoodPicker" Title="Выберите своё настроение"
-            Background="AliceBlue"
-            AbsoluteLayout.LayoutBounds=".5, .2, 350, 60" 
-            AbsoluteLayout.LayoutFlags="PositionProportional">
+        <Label Text="Date"
+               FontSize="Large"
+               TextColor="Black"
+               HorizontalOptions="Start"
+               AbsoluteLayout.LayoutBounds=".5, .15, 350, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+       
+        <DatePicker x:Name="DatePicker"
+        Background="AliceBlue"
+        AbsoluteLayout.LayoutBounds=".5, .2, 350, 40" 
+        AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <Label Text="Mood"
+               FontSize="Large"
+               TextColor="Black"
+               HorizontalOptions="Start"
+               AbsoluteLayout.LayoutBounds=".5, .26, 350, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+        
+        <Picker x:Name="MoodPicker" Title="Select your mood"
+                Background="AliceBlue"
+                AbsoluteLayout.LayoutBounds=".5, .32, 350, 60" 
+                AbsoluteLayout.LayoutFlags="PositionProportional">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Отличное</x:String>
@@ -63,47 +54,28 @@
             </Picker.ItemsSource>
         </Picker>
 
+        <Label Text="Notes"
+               FontSize="Large"
+               TextColor="Black"
+               HorizontalOptions="Start"
+               AbsoluteLayout.LayoutBounds=".5, .41, 350, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+        
         <Editor x:Name="NotesEditor" Placeholder="Запишите свои эмоции..."
-            Background="AliceBlue"
-            AbsoluteLayout.LayoutBounds=".5, .33, 350, 100" 
-            AbsoluteLayout.LayoutFlags="PositionProportional" />
+        Background="AliceBlue"
+        AbsoluteLayout.LayoutBounds=".5, .5, 350, 100" 
+        AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-        <Button Text="Сохранить"
-            FontSize="Large"
-            TextColor="Black"
-            CornerRadius="20"
-            BorderColor="Black"
-            BorderWidth="2"
-            Clicked="OnSaveMoodClicked" 
-            AbsoluteLayout.LayoutBounds=".5, .49, 350, 70" 
-            AbsoluteLayout.LayoutFlags="PositionProportional" />
+        <Button Text="Save Changes"
+                FontSize="Large"
+                TextColor="Black"
+                CornerRadius="20"
+                BorderWidth="2"
+                BorderColor="Black"
+                Clicked="OnSaveChangesClicked"
+                AbsoluteLayout.LayoutBounds=".5, .65, 350, 70"
+                AbsoluteLayout.LayoutFlags="PositionProportional" />
+        
+    </AbsoluteLayout>
 
-        <BoxView BackgroundColor="#5fc0ce"
-             CornerRadius="20"
-             AbsoluteLayout.LayoutBounds=".95, .99, 200, 300" 
-             AbsoluteLayout.LayoutFlags="PositionProportional"/>
-        <BoxView BackgroundColor="AliceBlue"
-             CornerRadius="10"
-             AbsoluteLayout.LayoutBounds=".9, .81, 170, 170" 
-             AbsoluteLayout.LayoutFlags="PositionProportional"/>
-        <Image Source="diary.png"
-           AbsoluteLayout.LayoutBounds=".87, .8, 150, 150" 
-           AbsoluteLayout.LayoutFlags="PositionProportional">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnImageTapped"/>
-            </Image.GestureRecognizers>
-        </Image>
-        <Button Text="Дневник" 
-            TextColor="Black"
-            FontSize="Large"
-            HorizontalOptions="Center"
-            CornerRadius="20"
-            WidthRequest="170"
-            Clicked="OnViewSavedMoodsClicked"
-            BackgroundColor="AliceBlue"
-            AbsoluteLayout.LayoutBounds=".9, .97, 170, 70" 
-            AbsoluteLayout.LayoutFlags="PositionProportional"/>
-
-    </AbsoluteLayout>-->
-    
 </ContentPage>

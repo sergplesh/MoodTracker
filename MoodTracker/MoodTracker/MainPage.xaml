@@ -5,21 +5,23 @@
 
     <AbsoluteLayout BackgroundColor="#ffd373">
 
+        <!--фон для места создания записи-->
         <BoxView BackgroundColor="#5fc0ce"
                  CornerRadius="20"
                  AbsoluteLayout.LayoutBounds=".5, .1, 380, 380" 
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
-
         <BoxView BackgroundColor="LightBlue"
                  CornerRadius="20"
                  AbsoluteLayout.LayoutBounds=".5, .09, 350, 50" 
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
-        
+
+        <!--надпись "Как прошёл ваш день?", оглавляющая создание записи-->
         <Label Text="Как прошёл ваш день?" TextColor="Black" FontSize="Title" 
                HorizontalOptions="CenterAndExpand"
                AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
                AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
+        <!--выбор настроения-->
         <Picker x:Name="MoodPicker" Title="Выберите своё настроение"
                 Background="AliceBlue"
                 AbsoluteLayout.LayoutBounds=".5, .2, 350, 60" 
@@ -35,11 +37,13 @@
             </Picker.ItemsSource>
         </Picker>
 
+        <!--запись впечатлений за день-->
         <Editor x:Name="NotesEditor" Placeholder="Запишите свои эмоции..."
                 Background="AliceBlue"
                 AbsoluteLayout.LayoutBounds=".5, .33, 350, 100" 
                 AbsoluteLayout.LayoutFlags="PositionProportional" />
 
+        <!--кнопка для сохранения записи-->
         <Button Text="Сохранить"
                 FontSize="Large"
                 TextColor="Black"
@@ -50,6 +54,7 @@
                 AbsoluteLayout.LayoutBounds=".5, .49, 350, 70" 
                 AbsoluteLayout.LayoutFlags="PositionProportional" />
 
+        <!--фон для кнопки дневника-->
         <BoxView BackgroundColor="#5fc0ce"
                  CornerRadius="20"
                  AbsoluteLayout.LayoutBounds=".95, .99, 200, 300" 
@@ -58,13 +63,17 @@
                  CornerRadius="10"
                  AbsoluteLayout.LayoutBounds=".9, .81, 170, 170" 
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        
+        <!--иконка дневника с записями-->
         <Image Source="diary.png"
                AbsoluteLayout.LayoutBounds=".87, .8, 150, 150" 
                AbsoluteLayout.LayoutFlags="PositionProportional">
-            <Image.GestureRecognizers>
+            <Image.GestureRecognizers> <!--можно тыкнуть по картинке и перейти на страницу с записями-->
                 <TapGestureRecognizer Tapped="OnImageTapped"/>
             </Image.GestureRecognizers>
         </Image>
+        
+        <!--кнопка для перехода на страницу с записями-->
         <Button Text="Дневник" 
                 TextColor="Black"
                 FontSize="Large"

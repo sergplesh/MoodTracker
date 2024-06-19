@@ -10,7 +10,7 @@ namespace MoodTracker
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Begin());
+            MainPage = new NavigationPage(new Begin()); // в качестве главной (начальной) страницы устанавливаем входное окно Begin
         }
 
         protected override void OnStart()

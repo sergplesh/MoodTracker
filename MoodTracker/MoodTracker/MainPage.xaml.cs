@@ -6,22 +6,28 @@ using Xamarin.Forms;
 
 namespace MoodTracker
 {
+    /// <summary>
+    /// страница для создания записи настроения
+    /// </summary>
     public partial class MainPage : ContentPage
     {
-        private static MoodDatabase _database;
+        private static MoodDatabase database; // связь с БД
 
         public static MoodDatabase Database
         {
             get
             {
-                if (_database == null)
+                if (database == null)
                 {
-                    _database = new MoodDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("MoodSQLite.db3"));
+                    database = new MoodDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("MoodSQLite.db3"));
                 }
-                return _database;
+                return database;
             }
         }
 
+        /// <summary>
+        /// Конструктор выводящий объекты (кнопки, текст и тд) на экран начальной страницы
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -63,11 +69,15 @@ namespace MoodTracker
             await Navigation.PushAsync(new SavedMoodsPage());
         }
 
+        /// <summary>
+        /// Получение пути к картинке, показывающей настроение
+        /// </summary>
         private string GetMoodImage(string mood)
         {
             var fileHelper = DependencyService.Get<IFileHelper>();
             switch (mood)
             {
+                // в зависимости от выбора пользователя устанавливаем картинку-настроение
                 case "Отличное":
                     return fileHelper.GetImagePath("excellent.png");
                 case "Хорошее":
@@ -83,8 +93,12 @@ namespace MoodTracker
             }
         }
 
+        /// <summary>
+        /// метод для перехода в дневник с записями кликом по картинке
+        /// </summary>
         private async void OnImageTapped(object sender, EventArgs e)
         {
+            // добавление в навигационный стек страницы для создания записи настроения
             await Navigation.PushAsync(new SavedMoodsPage());
         }
     }

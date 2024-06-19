@@ -5,6 +5,7 @@
     
     <AbsoluteLayout BackgroundColor="#ffd373">
 
+        <!--фон для иконки приложения-->
         <Ellipse Fill="#5fc0ce"
                  WidthRequest="300"
                  HeightRequest="300"
@@ -16,16 +17,22 @@
                  HeightRequest="220"
                  AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
                  AbsoluteLayout.LayoutFlags="PositionProportional"/>
-        <Label Text="MoodToday"
-               FontSize="40"
-               TextColor="Black"
-               AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
-               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <!--иконка приложения-->
         <Image Source="image.png"
                WidthRequest="220"
                HeightRequest="220"
                AbsoluteLayout.LayoutBounds=".5, .25, AutoSize, AutoSize" 
                AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        
+        <!--название приложения-->
+        <Label Text="MoodToday"
+               FontSize="40"
+               TextColor="Black"
+               AbsoluteLayout.LayoutBounds=".5, .1, AutoSize, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        
+        <!--кнопка для входа в приложение-->
         <Button Text ="Открыть 
                 дневник" 
                 CornerRadius="20"
