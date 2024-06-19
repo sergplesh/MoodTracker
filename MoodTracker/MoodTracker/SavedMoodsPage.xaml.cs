@@ -8,10 +8,15 @@ namespace MoodTracker
 {
     public partial class SavedMoodsPage : ContentPage
     {
-        private DateTime _lastTapTime;
-        private const int DoubleTapDelay = 300; // Время в миллисекундах, в течение которого должно произойти двойное нажатие
+        private DateTime lastTapTime;
 
-        private List<MoodEntry> allMoods; // Полный список настроений
+        // Время в миллисекундах, в течение которого должно произойти двойное нажатие
+        private const int DoubleTapDelay = 300;
+
+        /// <summary>
+        /// Полный список настроений
+        /// </summary>
+        private List<MoodEntry> allMoods; 
 
         public SavedMoodsPage()
         {
@@ -35,7 +40,9 @@ namespace MoodTracker
             FilterMoods();
         }
 
-        // Обработчик нажатия на кнопку "Scroll to Top"
+        /// <summary>
+        /// Возврат в начало списка
+        /// </summary>
         private void OnScrollToTopClicked(object sender, EventArgs e)
         {
             if (MoodListView.ItemsSource != null && allMoods.Any())
@@ -67,14 +74,14 @@ namespace MoodTracker
             if (e.Item is MoodEntry mood)
             {
                 var currentTapTime = DateTime.Now;
-                var timeDifference = currentTapTime - _lastTapTime;
+                var timeDifference = currentTapTime - lastTapTime;
 
                 if (timeDifference.TotalMilliseconds < DoubleTapDelay)
                 {
                     await DisplayAlert("Notes", mood.Notes, "OK");
                 }
 
-                _lastTapTime = currentTapTime;
+                lastTapTime = currentTapTime;
             }
 
             ((ListView)sender).SelectedItem = null;
