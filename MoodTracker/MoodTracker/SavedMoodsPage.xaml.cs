@@ -30,14 +30,20 @@ namespace MoodTracker
             MoodListView.ItemsSource = allMoods.OrderByDescending(m => m.Date).ToList();
         }
 
+        /// <summary>
+        /// Обработчик события выбора месяца и года
+        /// </summary>
         private void OnMonthYearSelected(object sender, EventArgs e)
         {
-            FilterMoods();
+            FilterMoods(); // Фильтрация списка настроений
         }
 
+        /// <summary>
+        /// Обработчик события изменения года
+        /// </summary>
         private void OnYearEntryChanged(object sender, TextChangedEventArgs e)
         {
-            FilterMoods();
+            FilterMoods(); // Фильтрация списка настроений
         }
 
         /// <summary>
@@ -51,6 +57,9 @@ namespace MoodTracker
             }
         }
 
+        /// <summary>
+        /// Метод для фильтрации настроений по выбранному месяцу и году
+        /// </summary>
         private void FilterMoods()
         {
             IEnumerable<MoodEntry> filteredMoods = allMoods;
@@ -58,49 +67,57 @@ namespace MoodTracker
             if (MonthPicker.SelectedIndex > 0) // Индекс 0 для "Все месяцы"
             {
                 int selectedMonth = MonthPicker.SelectedIndex; // Месяцы в DateTime начинаются с 1 (январь)
-                filteredMoods = filteredMoods.Where(m => m.Date.Month == selectedMonth);
+                filteredMoods = filteredMoods.Where(m => m.Date.Month == selectedMonth); // Фильтрация по месяцу
             }
 
             if (int.TryParse(YearEntry.Text, out int selectedYear))
             {
-                filteredMoods = filteredMoods.Where(m => m.Date.Year == selectedYear);
+                filteredMoods = filteredMoods.Where(m => m.Date.Year == selectedYear); // Фильтрация по году
             }
 
+            // Обновление источника данных для ListView, отсортированного по дате в порядке убывания
             MoodListView.ItemsSource = filteredMoods.OrderByDescending(m => m.Date).ToList();
         }
 
+        /// <summary>
+        /// Обработчик нажатия на элемент настроения в списке записей
+        /// </summary>
         private async void OnMoodItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item is MoodEntry mood)
             {
-                var currentTapTime = DateTime.Now;
-                var timeDifference = currentTapTime - lastTapTime;
+                var currentTapTime = DateTime.Now; // Текущее время нажатия
+                var timeDifference = currentTapTime - lastTapTime; // Разница во времени между нажатиями
 
                 if (timeDifference.TotalMilliseconds < DoubleTapDelay)
                 {
-                    await DisplayAlert("Notes", mood.Notes, "OK");
+                    // Показать заметки, если произошло двойное нажатие
+                    await DisplayAlert("Ваша запись:", mood.Notes, "Закрыть");
                 }
 
-                lastTapTime = currentTapTime;
+                lastTapTime = currentTapTime; // Обновление времени последнего нажатия
             }
 
-            ((ListView)sender).SelectedItem = null;
+            ((ListView)sender).SelectedItem = null; // Снятие выделения с элемента
         }
 
-        // метод для удаления записи
+        /// <summary>
+        /// Метод для удаления записи
+        /// </summary>
         private async void OnDeleteMoodClicked(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            var mood = button.BindingContext as MoodEntry;
+            var button = sender as Button; // Кнопка удаления
+            var mood = button.BindingContext as MoodEntry; // Получение записи настроения
 
             if (mood != null)
             {
-                bool isConfirmed = await DisplayAlert("Confirm Delete", "Are you sure you want to delete this mood?", "Yes", "No");
+                bool isConfirmed = await DisplayAlert("Подтверждение удаления", "Вы действительно хотите удалить запись?", "Да", "Нет");
                 if (isConfirmed)
                 {
+                    // Удаление записи из базы данных и списка
                     await MainPage.Database.DeleteMoodAsync(mood);
                     allMoods.Remove(mood);
-                    FilterMoods();
+                    FilterMoods(); // Обновление списка настроений
                 }
             }
         }
@@ -116,7 +133,7 @@ namespace MoodTracker
             if (mood != null)
             {
                 // Создание страницы редактирования и обработка обновления настроения
-                var editPage = new EditMoodPage(mood);
+                var editPage = new EditMoodPage(mood); // в параметр передаём запись настроения MoodEntry
                 editPage.MoodUpdated += (source, updatedMood) =>
                 {
                     var index = allMoods.IndexOf(mood); // Поиск индекса редактируемого настроения

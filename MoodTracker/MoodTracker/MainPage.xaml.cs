@@ -19,7 +19,7 @@ namespace MoodTracker
             {
                 if (database == null)
                 {
-                    database = new MoodDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("MoodSQLite.db3"));
+                    database = new MoodDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("MoodSQLite.db3")); // .db3: Указывает, что файл был создан и предназначен для использования с SQLite 3.
                 }
                 return database;
             }
@@ -78,9 +78,18 @@ namespace MoodTracker
         }
 
         /// <summary>
+        /// Метод для перехода в дневник с записями кликом по картинке
+        /// </summary>
+        private async void OnImageTapped(object sender, EventArgs e)
+        {
+            // Переход на страницу сохраненных настроений (добавление в навигационный стек страницы для создания записи настроения)
+            await Navigation.PushAsync(new SavedMoodsPage());
+        }
+
+        /// <summary>
         /// Получение пути к картинке, показывающей настроение
         /// </summary>
-        private string GetMoodImage(string mood)
+        public static string GetMoodImage(string mood)
         {
             var fileHelper = DependencyService.Get<IFileHelper>();
             switch (mood)
@@ -99,15 +108,6 @@ namespace MoodTracker
                 default:
                     return null;
             }
-        }
-
-        /// <summary>
-        /// Метод для перехода в дневник с записями кликом по картинке
-        /// </summary>
-        private async void OnImageTapped(object sender, EventArgs e)
-        {
-            // Переход на страницу сохраненных настроений (добавление в навигационный стек страницы для создания записи настроения)
-            await Navigation.PushAsync(new SavedMoodsPage());
         }
     }
 }
