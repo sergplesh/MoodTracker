@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.Android", "Mood
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.iOS", "MoodTracker\MoodTracker.iOS\MoodTracker.iOS.csproj", "{B103D00A-3960-4311-AD56-7F2570B187CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker", "MoodTracker\MoodTracker\MoodTracker.csproj", "{C383F461-46F6-4054-B009-0A2AD15E9DB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodTracker", "MoodTracker\MoodTracker\MoodTracker.csproj", "{C383F461-46F6-4054-B009-0A2AD15E9DB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
