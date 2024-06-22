@@ -44,19 +44,19 @@
                         AbsoluteLayout.LayoutFlags="PositionProportional">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>All Months</x:String>
-                        <x:String>January</x:String>
-                        <x:String>February</x:String>
-                        <x:String>March</x:String>
-                        <x:String>April</x:String>
-                        <x:String>May</x:String>
-                        <x:String>June</x:String>
-                        <x:String>July</x:String>
-                        <x:String>August</x:String>
-                        <x:String>September</x:String>
-                        <x:String>October</x:String>
-                        <x:String>November</x:String>
-                        <x:String>December</x:String>
+                        <x:String>Все месяцы</x:String>
+                        <x:String>Январь</x:String>
+                        <x:String>Февраль</x:String>
+                        <x:String>Март</x:String>
+                        <x:String>Апрель</x:String>
+                        <x:String>Май</x:String>
+                        <x:String>Июнь</x:String>
+                        <x:String>Июль</x:String>
+                        <x:String>Август</x:String>
+                        <x:String>Сентябрь</x:String>
+                        <x:String>Октябрь</x:String>
+                        <x:String>Ноябрь</x:String>
+                        <x:String>Декабрь</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>

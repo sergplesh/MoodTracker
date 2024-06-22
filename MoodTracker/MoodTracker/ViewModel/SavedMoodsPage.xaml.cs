@@ -27,7 +27,12 @@ namespace MoodTracker
         private async void LoadMoods()
         {
             allMoods = await MainPage.Database.GetMoodsAsync();
-            MoodListView.ItemsSource = allMoods.OrderByDescending(m => m.Date).ToList();
+            allMoods = allMoods.OrderByDescending(m => m.Date.Year)
+                .ThenByDescending(m => m.Date.Month)
+                .ThenByDescending(m => m.Date.Day)
+                .ThenBy(m => m.Date.Second)
+                .ToList();
+            MoodListView.ItemsSource = allMoods;
         }
 
         /// <summary>
@@ -53,7 +58,7 @@ namespace MoodTracker
         {
             if (MoodListView.ItemsSource != null && allMoods.Any())
             {
-                MoodListView.ScrollTo(allMoods.Last(), ScrollToPosition.End, true);
+                MoodListView.ScrollTo(allMoods.First(), ScrollToPosition.Start, true);
             }
         }
 

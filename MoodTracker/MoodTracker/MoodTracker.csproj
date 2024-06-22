@@ -22,25 +22,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MainPage.xaml.cs">
+    <Compile Update="ViewModel\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Begin.xaml">
+    <EmbeddedResource Update="View\Begin.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="EditMoodPage.xaml">
+    <EmbeddedResource Update="View\EditMoodPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="FlyoutPage1Detail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="MainPage.xaml">
+    <EmbeddedResource Update="View\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SavedMoodsPage.xaml">
+    <EmbeddedResource Update="View\SavedMoodsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

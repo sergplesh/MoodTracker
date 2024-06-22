@@ -5,6 +5,16 @@
     
     <AbsoluteLayout BackgroundColor="#ffd373">
 
+        <!-- Поддерживающая надпись -->
+        <Label x:Name="SupportiveMessageLabel"
+               FontSize="Large"
+               FontAttributes="Italic"
+               TextColor="Black"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               AbsoluteLayout.LayoutBounds=".5, .6, 300, AutoSize" 
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        
         <!--фон для иконки приложения-->
         <Ellipse Fill="#5fc0ce"
                  WidthRequest="300"
@@ -37,9 +47,11 @@
                 дневник" 
                 CornerRadius="20"
                 FontSize="25"
-                Clicked ="OpenApp"
-                BackgroundColor="#5fc0ce" 
-                AbsoluteLayout.LayoutBounds=".5, .7, 200, 100" 
+                Clicked ="OnOpenApp"
+                BackgroundColor="#5fc0ce"
+                BorderColor="Black"
+                BorderWidth="2"
+                AbsoluteLayout.LayoutBounds=".5, .85, 200, 100" 
                 AbsoluteLayout.LayoutFlags="PositionProportional" />
         
     </AbsoluteLayout>

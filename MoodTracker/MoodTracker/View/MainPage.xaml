@@ -48,7 +48,7 @@
         </Picker>
 
         <!--запись впечатлений за день-->
-        <Editor x:Name="NotesEditor" Placeholder="Запишите свои эмоции..."
+        <Editor x:Name="NotesEditor" Placeholder="Запишите свои впечатления..."
                 Background="AliceBlue"
                 AbsoluteLayout.LayoutBounds=".5, .35, 350, 100" 
                 AbsoluteLayout.LayoutFlags="PositionProportional" />

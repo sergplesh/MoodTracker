@@ -20,7 +20,7 @@
            AbsoluteLayout.LayoutBounds=".5, .09, AutoSize, AutoSize" 
            AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-        <Label Text="Date"
+        <Label Text="Дата"
                FontSize="Large"
                TextColor="Black"
                HorizontalOptions="Start"
@@ -32,7 +32,7 @@
         AbsoluteLayout.LayoutBounds=".5, .2, 350, 40" 
         AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Label Text="Mood"
+        <Label Text="Настроение"
                FontSize="Large"
                TextColor="Black"
                HorizontalOptions="Start"
@@ -54,7 +54,7 @@
             </Picker.ItemsSource>
         </Picker>
 
-        <Label Text="Notes"
+        <Label Text="Запись"
                FontSize="Large"
                TextColor="Black"
                HorizontalOptions="Start"
@@ -66,7 +66,7 @@
         AbsoluteLayout.LayoutBounds=".5, .5, 350, 100" 
         AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-        <Button Text="Save Changes"
+        <Button Text="Сохранить изменения"
                 FontSize="Large"
                 TextColor="Black"
                 CornerRadius="20"
