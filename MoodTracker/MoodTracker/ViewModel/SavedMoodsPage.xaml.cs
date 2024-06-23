@@ -24,14 +24,10 @@ namespace MoodTracker
             LoadMoods();
         }
 
-        private async void LoadMoods()
+        private void LoadMoods()
         {
-            allMoods = await MainPage.Database.GetMoodsAsync();
-            allMoods = allMoods.OrderByDescending(m => m.Date.Year)
-                .ThenByDescending(m => m.Date.Month)
-                .ThenByDescending(m => m.Date.Day)
-                .ThenBy(m => m.Date.Second)
-                .ToList();
+            allMoods = MainPage.Database.GetMoods();
+            allMoods = allMoods.OrderByDescending(m => m.Date).ToList();
             MoodListView.ItemsSource = allMoods;
         }
 
@@ -112,7 +108,7 @@ namespace MoodTracker
         private async void OnDeleteMoodClicked(object sender, EventArgs e)
         {
             var button = sender as Button; // Кнопка удаления
-            var mood = button.BindingContext as MoodEntry; // Получение записи настроения
+            MoodEntry mood = button.BindingContext as MoodEntry; // Получение записи настроения
 
             if (mood != null)
             {
@@ -120,7 +116,7 @@ namespace MoodTracker
                 if (isConfirmed)
                 {
                     // Удаление записи из базы данных и списка
-                    await MainPage.Database.DeleteMoodAsync(mood);
+                    MainPage.Database.DeleteMood(mood);
                     allMoods.Remove(mood);
                     FilterMoods(); // Обновление списка настроений
                 }
@@ -142,23 +138,12 @@ namespace MoodTracker
                 editPage.MoodUpdated += (source, updatedMood) =>
                 {
                     var index = allMoods.IndexOf(mood); // Поиск индекса редактируемого настроения
+                    MainPage.Database.DeleteMood(allMoods[index]); // удаление из таблицы бд прошлой записи
                     allMoods[index] = updatedMood; // Обновление настроения в списке
                     FilterMoods(); // Обновление списка настроений
                 };
                 await Navigation.PushAsync(editPage); // Переход на страницу редактирования
             }
         }
-
-        ///// <summary>
-        ///// Метод для вставки новой записи в начало списка
-        ///// </summary>
-        ///// <param name="mood">запись</param>
-        //public void InsertMoodAtStart(MoodEntry mood)
-        //{
-        //    // вставляем в список запись
-        //    allMoods.Insert(0, mood);
-        //    // сортируем в порядке убывания по дате записи
-        //    MoodListView.ItemsSource = allMoods.OrderByDescending(m => m.Date).ToList(); 
-        //}
     }
 }

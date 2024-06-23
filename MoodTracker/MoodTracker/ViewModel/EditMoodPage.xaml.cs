@@ -1,4 +1,5 @@
 ﻿using MoodTracker.Models;
+using MoodTracker.ViewModel;
 using System;
 using Xamarin.Forms;
 
@@ -30,13 +31,17 @@ namespace MoodTracker
             moodEntry.Notes = NotesEditor.Text;
             moodEntry.MoodImage = MainPage.GetMoodImage(moodEntry.Mood);
 
-            await MainPage.Database.SaveMoodAsync(moodEntry);
-            MoodUpdated?.Invoke(this, moodEntry);
+            MainPage.Database.SaveMood(moodEntry);
+
+            OnMoodUpdated(this, new MoodEventArgs(moodEntry));
             await Navigation.PopAsync();
         }
 
-        //public void OnMoodUpdated(object sender, EventArgs e)
-        //{}
+        public void OnMoodUpdated(object sender, MoodEventArgs e)
+        {
+            moodEntry = e.MoodEntry;
+            MoodUpdated?.Invoke(sender, moodEntry);
+        }
 
         public event EventHandler<MoodEntry> MoodUpdated;
     }

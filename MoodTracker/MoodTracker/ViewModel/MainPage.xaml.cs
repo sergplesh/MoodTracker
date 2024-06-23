@@ -2,6 +2,7 @@
 using MoodTracker.Models;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace MoodTracker
@@ -19,7 +20,7 @@ namespace MoodTracker
             {
                 if (database == null)
                 {
-                    database = new MoodDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("MoodSQLite.db3")); // .db3: Указывает, что файл был создан и предназначен для использования с SQLite 3.
+                    database = new MoodDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("MoodSQLite.db"));
                 }
                 return database;
             }
@@ -57,13 +58,7 @@ namespace MoodTracker
             };
 
             // сохраняем в таблицу БД сделанную запись
-            await Database.SaveMoodAsync(mood);
-
-            //// Вставляем новую запись в начало списка на странице сохраненных настроений
-            //if (Navigation.NavigationStack.LastOrDefault() is SavedMoodsPage savedMoodsPage)
-            //{
-            //    savedMoodsPage.InsertMoodAtStart(mood);
-            //}
+            Database.SaveMood(mood);
 
             MoodPicker.SelectedIndex = -1;
             NotesEditor.Text = string.Empty;
