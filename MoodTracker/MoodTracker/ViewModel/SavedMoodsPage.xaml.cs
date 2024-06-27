@@ -138,7 +138,6 @@ namespace MoodTracker
                 editPage.MoodUpdated += (source, updatedMood) =>
                 {
                     var index = allMoods.IndexOf(mood); // Поиск индекса редактируемого настроения
-                    MainPage.Database.DeleteMood(allMoods[index]); // удаление из таблицы бд прошлой записи
                     allMoods[index] = updatedMood; // Обновление настроения в списке
                     FilterMoods(); // Обновление списка настроений
                 };
